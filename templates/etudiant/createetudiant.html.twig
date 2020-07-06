@@ -3,12 +3,23 @@
 {% block title %} New Personne{% endblock %}
 
 {% block body %}
-    <h1>Ajouter une personne </h1>
-    {{ form_start(form)}}
-    <div class="form-group">
-        {{form_widget(form)}}
-        <input type="submit" value="Validez">
-    </div>
+
+ <div class="row d-flex align-items-center justify-content-center">
+     <div class="col-md-6">
+    {{ form_start(form,{'attr': {'class': 'form-group'}})}}
+        <h3 class="text-center">Ajouter une personne</h3>
+            {{form_label(form.matricule,null, {
+              'label': 'Enter le N° du matricule',
+              'label_attr': {'class': 'foo'}})}}
+
+            {{form_widget(form.matricule,{'attr': {'class': 'form-control col-md-6'}})}}
+            {{form_errors(form.matricule)}}
+            <input type="submit" value="Enregistrer" class="btn btn-primary col-md-6 mt-2">
+         
+    {{ form_rest(form)}}
     {{ form_end(form)}}
+   </div>
+ 
+</div>
 {% endblock %}
 

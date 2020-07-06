@@ -3,13 +3,21 @@
 {% block title %}batiment{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un batiment </h1>
-    {{ form_start(form)}}
-    <div class="form-group">
-        {{form_widget(form)}}
-        <input type="submit" value="Validez">
-    </div>
-    {{ form_end(form)}}
+<div class=" d-flex align-items-center justify-content-center">
+     <div class="row">
+        {{ form_start(form,{'attr': {'class': 'form-group col-md-12 '}})}}
+            <h3 class="text-center">Ajouter un batiment </h3>
+                {{form_label(form.Nbatiment,null, {
+                  'label': 'Enter le N° du batment',
+                  'label_attr': {'class': 'foo'}})}}
 
-         <h3><a href={{ path('batiment_afficher') }}>Liste des Batmient</a></h3>
+                {{form_widget(form.Nbatiment,{'attr': {'class': 'form-control col-md-12 '}})}}
+                {{form_errors(form.Nbatiment)}}
+                <input type="submit" value="Enregistrer" class="btn btn-primary  col-md-12 mt-3 ">
+            
+        {{ form_end(form)}}
+      <div class="col-md-11 text-center btn btn-secondary ml-3 py-2"><a class="text-light"href={{ path('batiment_afficher') }}>Lister les Batmients</a></div>
+   </div>
+ 
+</div>
 {% endblock %}

@@ -3,7 +3,33 @@
 {% block title %}Hello !{% endblock %}
 
 {% block body %}
-<pre>
-    {{dump(etudiant) }}
-</pre>
+<div class="d-flex align-items-center justify-content-center">
+    <div class="row ">
+        <div class="col">
+            <table id="" class="table table-striped" >
+                <thead>
+                    <tr class="text-center">
+                        <th>N° batiment</th>
+                        <th colspan="2">Fonction</th>
+                        <th>detail</yh>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                      {% for batiment in batiments  %}
+                        <tr class="text-center">
+                            <td>00{{batiment.Nbatiment}}</td>
+                            <td><a href="">Modifier</a></td>
+                            <td><a href="">Supprimer</a></td>
+                            <td><a href="{{ path('batiment_read', {'id': batiment.id}) }}">Voire</a></td>
+                        </tr>
+                     {% endfor %}
+                    
+                </tbody>
+            </table>
+            <div class="suivant float-right"><input id="suivant" class="btn btn-success" type="button" value="suivant">
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
