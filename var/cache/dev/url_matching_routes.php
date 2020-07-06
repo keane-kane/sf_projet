@@ -13,6 +13,12 @@ return [
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/batiment' => [[['_route' => 'batiment', '_controller' => 'App\\Controller\\BatimentController::index'], null, null, null, false, false, null]],
+        '/batiment/afficher' => [[['_route' => 'batiment_afficher', '_controller' => 'App\\Controller\\BatimentController::afficher'], null, null, null, false, false, null]],
+        '/chambre' => [[['_route' => 'chambre', '_controller' => 'App\\Controller\\ChambreController::index'], null, null, null, false, false, null]],
+        '/chambre/create' => [[['_route' => 'chambre_create', '_controller' => 'App\\Controller\\ChambreController::create'], null, null, null, false, false, null]],
+        '/etudiant' => [[['_route' => 'etudiant_afficher', '_controller' => 'App\\Controller\\EtudiantController::afficher'], null, null, null, false, false, null]],
+        '/' => [[['_route' => 'etudiant', '_controller' => 'App\\Controller\\EtudiantController::index'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -31,6 +37,7 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
+                .'|/batiment/([0-9]+)(*:187)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -40,8 +47,9 @@ return [
         116 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        159 => [
-            [['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null],
+        159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
+        187 => [
+            [['_route' => 'batiment_read', '_controller' => 'App\\Controller\\BatimentController::read'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

@@ -15,4 +15,11 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], []],
+    'batiment' => [[], ['_controller' => 'App\\Controller\\BatimentController::index'], [], [['text', '/batiment']], [], []],
+    'batiment_afficher' => [[], ['_controller' => 'App\\Controller\\BatimentController::afficher'], [], [['text', '/batiment/afficher']], [], []],
+    'batiment_read' => [['id'], ['_controller' => 'App\\Controller\\BatimentController::read'], ['id' => '[0-9]+'], [['variable', '/', '[0-9]+', 'id', true], ['text', '/batiment']], [], []],
+    'chambre' => [[], ['_controller' => 'App\\Controller\\ChambreController::index'], [], [['text', '/chambre']], [], []],
+    'chambre_create' => [[], ['_controller' => 'App\\Controller\\ChambreController::create'], [], [['text', '/chambre/create']], [], []],
+    'etudiant_afficher' => [[], ['_controller' => 'App\\Controller\\EtudiantController::afficher'], [], [['text', '/etudiant']], [], []],
+    'etudiant' => [[], ['_controller' => 'App\\Controller\\EtudiantController::index'], [], [['text', '/']], [], []],
 ];

@@ -48,24 +48,47 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
 <html>
     <head>
         <meta charset=\"UTF-8\">
+        <!-- Required meta tags -->
+       <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
+   
+       <!-- Bootstrap CSS -->
+       <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css\">
+       <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">
+
+       <link rel=\"stylesheet\" href=\"";
+        // line 12
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/styles.css"), "html", null, true);
+        echo "\">
         <title>";
-        // line 5
+        // line 13
         $this->displayBlock('title', $context, $blocks);
         echo "</title>
         ";
-        // line 6
+        // line 14
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 7
+        // line 15
         echo "    </head>
-    <body>
+    <body class=>
+
         ";
-        // line 9
+        // line 18
+        echo twig_include($this->env, $context, "inc/header.html.twig");
+        echo "
+        
+        ";
+        // line 20
         $this->displayBlock('body', $context, $blocks);
-        // line 10
-        echo "        ";
+        // line 21
+        echo "        <script type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script> 
+        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>
+        <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>
+
+        ";
+        // line 25
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 11
-        echo "    </body>
+        // line 26
+        echo "        
+    </body>
 </html>
 ";
         
@@ -76,7 +99,7 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
 
     }
 
-    // line 5
+    // line 13
     public function block_title($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -95,7 +118,7 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
 
     }
 
-    // line 6
+    // line 14
     public function block_stylesheets($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -113,7 +136,7 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
 
     }
 
-    // line 9
+    // line 20
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -131,7 +154,7 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
 
     }
 
-    // line 10
+    // line 25
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -154,9 +177,14 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
         return "base.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  135 => 10,  117 => 9,  99 => 6,  80 => 5,  68 => 11,  65 => 10,  63 => 9,  59 => 7,  57 => 6,  53 => 5,  47 => 1,);
+        return array (  158 => 25,  140 => 20,  122 => 14,  103 => 13,  90 => 26,  88 => 25,  82 => 21,  80 => 20,  75 => 18,  70 => 15,  68 => 14,  64 => 13,  60 => 12,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -165,12 +193,28 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
 <html>
     <head>
         <meta charset=\"UTF-8\">
+        <!-- Required meta tags -->
+       <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
+   
+       <!-- Bootstrap CSS -->
+       <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css\">
+       <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">
+
+       <link rel=\"stylesheet\" href=\"{{ asset('css/styles.css') }}\">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
+    <body class=>
+
+        {{ include (\"inc/header.html.twig\") }}
+        
         {% block body %}{% endblock %}
+        <script type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script> 
+        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>
+        <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>
+
         {% block javascripts %}{% endblock %}
+        
     </body>
 </html>
 ", "base.html.twig", "C:\\xampp\\htdocs\\sf_projet\\templates\\base.html.twig");

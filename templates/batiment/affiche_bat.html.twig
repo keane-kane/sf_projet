@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Personne{% endblock %}
+
+{% block body %}
+   
+    <div class="center">
+
+       <table>
+        <tr>
+            <th>N° batiment</th>
+            <th colspan="2">Fonction</th>
+            <th>detail</yh>
+        </tr>
+        {% for batiment in batiments  %}
+            <tr>
+                <td>00{{batiment.Nbatiment}}</td>
+                <td><a href="">Modifier</a></td>
+                <td><a href="">Supprimer</a></td>
+                <td><a href="{{ path('batiment_read', {'id': batiment.id}) }}">Voire</a></td>
+            </tr>
+        {% endfor %}
+       
+    </table>
+    </div>
+
+{% endblock %}

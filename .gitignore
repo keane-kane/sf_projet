@@ -6,7 +6,12 @@
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
+/ tests  export-ignore
+/ phpunit.xml.dist  export-ignore
+/ .gitattributes  export-ignore
+/ .gitignore  export-ignore
 /vendor/
+
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
