@@ -9,18 +9,28 @@
             <table id="" class="table table-striped" >
                 <thead>
                     <tr class="text-center">
-                        <th>N° batiment</th>
+                        <th>Matricule</th>
+                        <th>Prenom</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Tel</th>
+                        <th>Date N</th>
                         <th colspan="2">Fonction</th>
                         <th>detail</yh>
                     </tr>
                 </thead>
                 <tbody id="tbody">
-                      {% for batiment in batiments  %}
+                      {% for etudiant in etudiants  %}
                         <tr class="text-center">
-                            <td>00{{batiment.Nbatiment}}</td>
+                            <td>{{etudiant.matricule}}</td>
+                            <td>{{etudiant.prenom}}</td>
+                            <td>{{etudiant.nom}}</td>
+                            <td>{{etudiant.email}}</td>
+                            <td>{{etudiant.tel}}</td>
+                            <td>{{etudiant.dateNaiss|date('y/m/d')}}</td>
                             <td><a href="">Modifier</a></td>
                             <td><a href="">Supprimer</a></td>
-                            <td><a href="{{ path('batiment_read', {'id': batiment.id}) }}">Voire</a></td>
+                            <td><a href="{{ path('etudiant_afficher', {'id': etudiant.id}) }}">Voire</a></td>
                         </tr>
                      {% endfor %}
                     

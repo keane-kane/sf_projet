@@ -1,14 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} New Personne{% endblock %}
+{% block title %} New Room{% endblock %}
 
 {% block body %}
-    <h1>Ajouter une personne </h1>
-    {{ form_start(form)}}
-    <div class="form-group">
-        {{form_widget(form)}}
-        <input type="submit" value="Validez">
-    </div>
-    {{ form_end(form)}}
+  <div class="row align-items-center justify-content-center mt-5">
+     <div class="col-4">
+        {{ form_start(form,{'attr': {'class': 'col-md-12 mt-2'}})}}
+            <h3 class="text-center mb-5">Ajouter une chambre </h3>
+            {{form_label(form.batiment,null, {
+                'label': 'Choisir le N° du batiment :',
+                'label_attr': {'class': 'foo'}})}}
+            {{form_widget(form.batiment,{'attr': {'class': 'form-control col-md-12 '} })}}
+          
+            {{form_label(form.Nchambre,null, {
+                'label': 'Le N° chambre est :',
+                'label_attr': {'class': 'foo'}})}}
+            {{form_widget(form.Nchambre,{'attr': {'class': 'form-control col-md-12 ',
+                                                 'readonly':'readonly',} })}}
+
+            {{form_label(form.typeChambre,null, {
+                'label': 'Choisir le N° du typeChambre :',
+                'label_attr': {'class': 'foo'}})}}
+            {{form_widget(form.typeChambre,{'attr': {'class': 'form-control col-md-12 '}})}}
+           
+            <input type="submit" value="Enregistrer" class="btn btn-primary  col-md-12 mt-3 ">
+            
+        {{ form_rest(form)}}
+        {{ form_end(form)}}
+   </div>
+ 
+</div>
 {% endblock %}
 
+ 

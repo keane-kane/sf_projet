@@ -3,10 +3,10 @@
 {% block title %}batiment{% endblock %}
 
 {% block body %}
-<div class=" d-flex align-items-center justify-content-center">
+<div class=" d-flex align-items-center justify-content-center mt-5">
      <div class="row">
-        {{ form_start(form,{'attr': {'class': 'form-group col-md-12 '}})}}
-            <h3 class="text-center">Ajouter un batiment </h3>
+        {{ form_start(form,{'attr': {'class': 'form-group col-md-12 mt-2'}})}}
+            <h3 class="text-center mb-5">Ajouter un batiment </h3>
                 {{form_label(form.Nbatiment,null, {
                   'label': 'Enter le N° du batment',
                   'label_attr': {'class': 'foo'}})}}

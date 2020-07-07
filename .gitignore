@@ -11,7 +11,9 @@
 / .gitattributes  export-ignore
 / .gitignore  export-ignore
 /vendor/
-
+/text/
+/text.pub/
+/index.lock/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###

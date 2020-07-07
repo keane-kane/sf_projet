@@ -32,9 +32,11 @@ class EtudiantController extends AbstractController
       /**
      * @Route("/etudiant", name="etudiant_afficher")
      */
-    public function afficher(Etudiant $etudiant)
+    public function afficher(EtudiantRepository $etudiantRepository)
     {
-        return $this->render('etudiant/afficher.html.twig', compact('etudiant'));
+        $etudiants = $etudiantRepository->findAll();
+        //dd($etudiants);
+        return $this->render('etudiant/afficher.html.twig', compact('etudiants'));
     }
    
 }

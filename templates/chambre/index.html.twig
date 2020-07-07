@@ -3,18 +3,40 @@
 {% block title %}Hello ChambreController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/sf_projet/src/Controller/ChambreController.php'|file_link(0) }}">src/Controller/ChambreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/sf_projet/templates/chambre/index.html.twig'|file_link(0) }}">templates/chambre/index.html.twig</a></code></li>
-    </ul>
+<div class="d-flex align-items-center justify-content-center">
+    <div class="row ">
+        <div class="col">
+            <table id="" class="table table-striped" >
+                <thead>
+                    <tr class="text-center">
+                        <th>N° batiment</th>
+                        <th>N° chambre</th>
+                        <th>Type</th>
+                        <th colspan="2">Fonction</th>
+                        <th>detail</yh>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                      {% for chambre in chambres  %}
+                        <tr class="text-center">
+                            <td>
+                             
+                                   {{chambre.batiment.id}} 
+                            
+                            </td>
+                            <td>{{chambre.Nchambre}}</td>
+                            <td>{{chambre.typeChambre}}</td>
+                            <td><a href="">Modifier</a></td>
+                            <td><a href="">Supprimer</a></td>
+                            <td><a href="{{ path('batiment_read', {'id': chambre.id}) }}">Voire</a></td>
+                        </tr>
+                     {% endfor %}
+                    
+                </tbody>
+            </table>
+            <div class="suivant float-right"><input id="suivant" class="btn btn-success" type="button" value="suivant">
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

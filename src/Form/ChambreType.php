@@ -16,11 +16,11 @@ class ChambreType extends AbstractType
         $builder
             ->add('Nchambre')
             ->add('typeChambre')
-            ->add('batiment',EntityType::class, [
+            ->add('batiment',EntityType::class,[
                 'class' => Batiment::class,
                 'choice_label' => function($batiment){
-                    return '00'.$batiment->getNbatiment();
-                }
+                    return $batiment->getNbatiment();
+                },
             ])
         ;
     }
