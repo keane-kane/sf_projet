@@ -6,7 +6,7 @@ use App\Repository\ChambreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+ 
 /**
  * @ORM\Entity(repositoryClass=ChambreRepository::class)
  */
@@ -20,7 +20,7 @@ class Chambre
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
      */
     private $Nchambre;
 
@@ -59,12 +59,12 @@ class Chambre
         return $this->id;
     }
 
-    public function getNchambre(): ?int
+    public function getNchambre(): ?string
     {
         return $this->Nchambre;
     }
 
-    public function setNchambre(int $Nchambre): self
+    public function setNchambre(string $Nchambre): self
     {
         $this->Nchambre = $Nchambre;
 

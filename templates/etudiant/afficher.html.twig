@@ -28,15 +28,16 @@
                             <td>{{etudiant.email}}</td>
                             <td>{{etudiant.tel}}</td>
                             <td>{{etudiant.dateNaiss|date('y/m/d')}}</td>
-                            <td><a href="">Modifier</a></td>
-                            <td><a href="">Supprimer</a></td>
+                            <td><a class="class':'btn btn-success" href="{{ path('batiment_read', {'id': chambre.id}) }}">update</a></td>
+                            <td><a class="class':'btn btn-danger"  href="{{ path('batiment_read', {'id': chambre.id,'class':'btn btn-danger '}) }}">delete</a></td>
                             <td><a href="{{ path('etudiant_afficher', {'id': etudiant.id}) }}">Voire</a></td>
                         </tr>
                      {% endfor %}
                     
                 </tbody>
             </table>
-            <div class="suivant float-right"><input id="suivant" class="btn btn-success" type="button" value="suivant">
+            <div class="navigation text-center">
+                {{ knp_pagination_render(etudiants) }}
             </div>
         </div>
     </div>

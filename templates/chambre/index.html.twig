@@ -6,35 +6,33 @@
 <div class="d-flex align-items-center justify-content-center">
     <div class="row ">
         <div class="col">
-            <table id="" class="table table-striped" >
+            <table id="" class="table table-striped mydata" >
                 <thead>
                     <tr class="text-center">
                         <th>N° batiment</th>
                         <th>N° chambre</th>
                         <th>Type</th>
                         <th colspan="2">Fonction</th>
-                        <th>detail</yh>
+                       
                     </tr>
                 </thead>
                 <tbody id="tbody">
                       {% for chambre in chambres  %}
                         <tr class="text-center">
-                            <td>
-                             
-                                   {{chambre.batiment.id}} 
-                            
-                            </td>
+                            <td> {{chambre.batiment.id}}</td>
                             <td>{{chambre.Nchambre}}</td>
                             <td>{{chambre.typeChambre}}</td>
-                            <td><a href="">Modifier</a></td>
-                            <td><a href="">Supprimer</a></td>
-                            <td><a href="{{ path('batiment_read', {'id': chambre.id}) }}">Voire</a></td>
+                            <td><a class="btn btn-success" href="{{ path('chambre_update', {'id': chambre.id}) }}">update</a></td>
+                            <td><a class="btn btn-danger"  href="{{ path('chambre_delete', {'id': chambre.id}) }}">delete</a></td>
                         </tr>
                      {% endfor %}
                     
                 </tbody>
             </table>
-            <div class="suivant float-right"><input id="suivant" class="btn btn-success" type="button" value="suivant">
+            <div class="navigation text-center">
+              {{ knp_pagination_render(chambres) }}
+           </div>
+           
             </div>
         </div>
     </div>
