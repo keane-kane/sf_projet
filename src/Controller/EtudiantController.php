@@ -11,6 +11,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 class EtudiantController extends AbstractController
 {
+    public function Matricule($n,$p,$id)
+    {
+        $n= strtoupper($n[0].$n[1]);
+        $p=strtoupper($p[strlen($p)-2].$p[strlen($p)-1]);
+        return date('Y', time()).$n.$p.sprintf("%04d", $id);
+    }
     /**
      * @Route("/", name="etudiant")
      */
@@ -21,8 +27,16 @@ class EtudiantController extends AbstractController
         // dd($etudiant);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            $use = $form["prenom"]->getData();
+            $username = $form["nom"]->getData();
+            
+            
+         
+            
             $em = $this->getDoctrine()->getManager();
+            dd($etudiant->getId());
             $em->persist($etudiant);
+           
             $em->flush();
         }
         return $this->render('etudiant/createetudiant.html.twig', [
@@ -43,7 +57,7 @@ class EtudiantController extends AbstractController
         return $this->render('etudiant/afficher.html.twig', compact('etudiants'));
     }
      /**
-     * @Route("/etudiants/update/{id}", name="etudiants_update")
+     * @Route("/etudiant/update/{id}", name="etudiant_update")
     */
     public function update(Request $request,int $id)
     {
@@ -68,9 +82,21 @@ class EtudiantController extends AbstractController
     public function delete(int $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $chambre = $entityManager->getRepository(Chambre::class)->find($id);
-        $entityManager->remove($chambre);
+        $etudiant = $entityManager->getRepository(Etudiant::class)->find($id);
+        $entityManager->remove($etudiant);
         $entityManager->flush();
+    
+        return $this->redirectToRoute("etudiant_afficher");
+    }
+      
+    /**
+     * @Route("/etudiant/detail/{id}", name="etudiant_detail")
+    */
+    public function detail(int $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+      
+    
     
         return $this->redirectToRoute("etudiant_afficher");
     }

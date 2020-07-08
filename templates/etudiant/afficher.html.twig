@@ -28,9 +28,9 @@
                             <td>{{etudiant.email}}</td>
                             <td>{{etudiant.tel}}</td>
                             <td>{{etudiant.dateNaiss|date('y/m/d')}}</td>
-                            <td><a class="class':'btn btn-success" href="{{ path('batiment_read', {'id': chambre.id}) }}">update</a></td>
-                            <td><a class="class':'btn btn-danger"  href="{{ path('batiment_read', {'id': chambre.id,'class':'btn btn-danger '}) }}">delete</a></td>
-                            <td><a href="{{ path('etudiant_afficher', {'id': etudiant.id}) }}">Voire</a></td>
+                            <td><a class="class':'btn btn-success" href="{{ path('etudiant_update', {'id': etudiant.id}) }}">update</a></td>
+                            <td><a class="class':'btn btn-danger"  href="{{ path('etudiant_delete', {'id': etudiant.id}) }}">delete</a></td>
+                            <td><a class="class':'btn btn-primary"  href="{{ path('etudiant_detail', {'id': etudiant.id}) }}">Voire</a></td>
                         </tr>
                      {% endfor %}
                     
