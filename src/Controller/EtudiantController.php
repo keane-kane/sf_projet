@@ -5,6 +5,7 @@ use App\Entity\Etudiant;
 use App\Form\EtudiantType;
 use App\Repository\EtudiantRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,24 +21,31 @@ class EtudiantController extends AbstractController
     /**
      * @Route("/", name="etudiant")
      */
-    public function index(Request $request):Response
+    public function index(Request $request, EtudiantRepository $etudiantRepository):Response
     {
+        $nbetud = $etudiantRepository->findAll(); 
+        $lastMat= count($nbetud);
         $etudiant = new Etudiant();
+       
         $form = $this->createForm(EtudiantType::class,$etudiant);
         // dd($etudiant);
+        $em = $this->getDoctrine()->getManager();
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
-            $use = $form["prenom"]->getData();
-            $username = $form["nom"]->getData();
-            
-            
-         
-            
-            $em = $this->getDoctrine()->getManager();
-            dd($etudiant->getId());
+
+            $p= $form["prenom"]->getData();
+            $n= $form['nom']->getData();
+            $id =  $lastMat+1;
+            $matricule = $this->Matricule($n,$p,$id);
+            $etudiant->setMatricule($matricule);
+
             $em->persist($etudiant);
-           
             $em->flush();
+            
+            $this->addFlash('success', 'L\'etudiant a ete bien  enregistre!');
+            return $this->redirectToRoute("etudiant");
+            // dd( $session->get('id'));
         }
         return $this->render('etudiant/createetudiant.html.twig', [
              'form'=> $form->createView()

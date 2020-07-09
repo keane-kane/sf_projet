@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Etudiant;
+use App\Entity\TypeBourse;
+use App\Entity\Chambre;
+use App\Entity\AddressType;
 use App\Entity\TypeEtudiant;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -16,7 +19,7 @@ class EtudiantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('matricule')
+            
             ->add('prenom',TextType::class)
             ->add('nom',TextType::class)
             ->add('email',EmailType::class)
@@ -25,11 +28,24 @@ class EtudiantType extends AbstractType
                 // renders it as a single text box
                 'widget' => 'single_text',
             ])
+          
             ->add('etre',null,[
-                
                 'class' => TypeEtudiant::class,
                 'choice_label' => function($etre){
                     return $etre->getOptions();
+                },
+            ])
+            ->add('loger',TextType::class)
+            ->add('habite',null,[
+                'class' =>Chambre::class,
+                'choice_label' => function($loger){
+                    return $loger->getNchambre();
+                },
+            ])
+            ->add('boursier',null,[
+                'class' =>TypeBourse::class,
+                'choice_label' => function($boursier){
+                    return $boursier->getMontant();
                 },
             ])
         ;

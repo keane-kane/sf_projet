@@ -23,15 +23,10 @@ class Address
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $LAddress;
-
-    /**
-     * @ORM\OneToMany(targetEntity=EtudiantComplet::class, mappedBy="habite")
-     */
-    private $etudiantComplets;
-
+   
     public function __construct()
     {
-        $this->etudiantComplets = new ArrayCollection();
+       
     }
 
     public function getId(): ?int
@@ -51,34 +46,7 @@ class Address
         return $this;
     }
 
-    /**
-     * @return Collection|EtudiantComplet[]
-     */
-    public function getEtudiantComplets(): Collection
-    {
-        return $this->etudiantComplets;
-    }
+  
 
-    public function addEtudiantComplet(EtudiantComplet $etudiantComplet): self
-    {
-        if (!$this->etudiantComplets->contains($etudiantComplet)) {
-            $this->etudiantComplets[] = $etudiantComplet;
-            $etudiantComplet->setHabite($this);
-        }
 
-        return $this;
-    }
-
-    public function removeEtudiantComplet(EtudiantComplet $etudiantComplet): self
-    {
-        if ($this->etudiantComplets->contains($etudiantComplet)) {
-            $this->etudiantComplets->removeElement($etudiantComplet);
-            // set the owning side to null (unless already changed)
-            if ($etudiantComplet->getHabite() === $this) {
-                $etudiantComplet->setHabite(null);
-            }
-        }
-
-        return $this;
-    }
 }

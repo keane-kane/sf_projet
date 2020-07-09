@@ -26,19 +26,30 @@ class ChambreController extends AbstractController
         /**
      * @Route("/chambre/create", name="chambre_create")
      */
-   public function create(Request $request):Response
+   public function create( ChambreRepository  $roomRepository,Request $request):Response
     {
+        $room = $roomRepository->findAll();
+        $chbre =count($room);
         $chambre = new Chambre();
         $form = $this->createForm(ChambreType::class,$chambre);
         // dd($chambre);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            if($form['Nchambre']->getData()==null){
+                $nbat= $form['batiment']->getData();
+                $nch= sprintf("%03d", $nbat).sprintf("%04d", $chbre);
+                $chambre->setNchambre($nch);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($chambre);
             $em->flush();
+            $this->addFlash('success', 'Le chambre a ete bien  enregistree!');
+            return $this->redirectToRoute("chambre_create");
+        
         }
         return $this->render('chambre/createchambre.html.twig', [
-            'form'=> $form->createView()
+            'form'=> $form->createView(),
+            "nbchbre" =>$chbre 
         ]);
     }
 
@@ -73,7 +84,8 @@ class ChambreController extends AbstractController
         }
         return $this->render('chambre/createchambre.html.twig', [
             "form_title" => "Modifier un chambre",
-            "form" => $form->createView(),
+            "form" => $form->createView()
+            
         ]);
     }
      

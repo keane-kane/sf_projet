@@ -17,11 +17,7 @@ class Etudiant
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $matricule;
-
+  
     /**
      * @ORM\Column(type="string", length=50)
      */
@@ -52,6 +48,23 @@ class Etudiant
      * @ORM\JoinColumn(nullable=false)
      */
     private $etre;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist", "remove"})
+     */
+    private $loger;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Chambre::class, inversedBy="etudiants")
+     */
+    private $habite;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Bourse::class, inversedBy="etudiants")
+     */
+    private $boursier;
+
+   
 
     public function getId(): ?int
     {
@@ -141,4 +154,42 @@ class Etudiant
 
         return $this;
     }
+
+    public function getLoger(): ?Address
+    {
+        return $this->loger;
+    }
+
+    public function setLoger(?Address $loger): self
+    {
+        $this->loger = $loger;
+
+        return $this;
+    }
+
+    public function getHabite(): ?Chambre
+    {
+        return $this->habite;
+    }
+
+    public function setHabite(?Chambre $habite): self
+    {
+        $this->habite = $habite;
+
+        return $this;
+    }
+
+    public function getBoursier(): ?Bourse
+    {
+        return $this->boursier;
+    }
+
+    public function setBoursier(?Bourse $boursier): self
+    {
+        $this->boursier = $boursier;
+
+        return $this;
+    }
+
+ 
 }

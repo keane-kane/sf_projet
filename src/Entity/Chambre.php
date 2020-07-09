@@ -37,13 +37,15 @@ class Chambre
     private $batiment;
 
     /**
-     * @ORM\OneToMany(targetEntity=EtudiantComplet::class, mappedBy="loger")
+     * @ORM\OneToMany(targetEntity=Etudiant::class, mappedBy="habite")
      */
-    private $etudiantComplets;
+    private $etudiants;
+
+   
 
     public function __construct()
     {
-        $this->etudiantComplets = new ArrayCollection();
+        $this->etudiants = new ArrayCollection();
     }
  /**
     * (Add this method into your class)
@@ -96,30 +98,30 @@ class Chambre
     }
 
     /**
-     * @return Collection|EtudiantComplet[]
+     * @return Collection|Etudiant[]
      */
-    public function getEtudiantComplets(): Collection
+    public function getEtudiants(): Collection
     {
-        return $this->etudiantComplets;
+        return $this->etudiants;
     }
 
-    public function addEtudiantComplet(EtudiantComplet $etudiantComplet): self
+    public function addEtudiant(Etudiant $etudiant): self
     {
-        if (!$this->etudiantComplets->contains($etudiantComplet)) {
-            $this->etudiantComplets[] = $etudiantComplet;
-            $etudiantComplet->setLoger($this);
+        if (!$this->etudiants->contains($etudiant)) {
+            $this->etudiants[] = $etudiant;
+            $etudiant->setHabite($this);
         }
 
         return $this;
     }
 
-    public function removeEtudiantComplet(EtudiantComplet $etudiantComplet): self
+    public function removeEtudiant(Etudiant $etudiant): self
     {
-        if ($this->etudiantComplets->contains($etudiantComplet)) {
-            $this->etudiantComplets->removeElement($etudiantComplet);
+        if ($this->etudiants->contains($etudiant)) {
+            $this->etudiants->removeElement($etudiant);
             // set the owning side to null (unless already changed)
-            if ($etudiantComplet->getLoger() === $this) {
-                $etudiantComplet->setLoger(null);
+            if ($etudiant->getHabite() === $this) {
+                $etudiant->setHabite(null);
             }
         }
 

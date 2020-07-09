@@ -29,15 +29,12 @@ class TypeEtudiant
      */
     private $etudiants;
 
-    /**
-     * @ORM\OneToMany(targetEntity=EtudiantComplet::class, mappedBy="status")
-     */
-    private $etudiantComplets;
+    
 
     public function __construct()
     {
         $this->etudiants = new ArrayCollection();
-        $this->etudiantComplets = new ArrayCollection();
+        
     }
     /**
     * (Add this method into your class)
@@ -64,7 +61,7 @@ class TypeEtudiant
 
         return $this;
     }
-
+ 
     /**
      * @return Collection|Etudiant[]
      */
@@ -96,34 +93,4 @@ class TypeEtudiant
         return $this;
     }
 
-    /**
-     * @return Collection|EtudiantComplet[]
-     */
-    public function getEtudiantComplets(): Collection
-    {
-        return $this->etudiantComplets;
-    }
-
-    public function addEtudiantComplet(EtudiantComplet $etudiantComplet): self
-    {
-        if (!$this->etudiantComplets->contains($etudiantComplet)) {
-            $this->etudiantComplets[] = $etudiantComplet;
-            $etudiantComplet->setStatus($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEtudiantComplet(EtudiantComplet $etudiantComplet): self
-    {
-        if ($this->etudiantComplets->contains($etudiantComplet)) {
-            $this->etudiantComplets->removeElement($etudiantComplet);
-            // set the owning side to null (unless already changed)
-            if ($etudiantComplet->getStatus() === $this) {
-                $etudiantComplet->setStatus(null);
-            }
-        }
-
-        return $this;
-    }
 }
