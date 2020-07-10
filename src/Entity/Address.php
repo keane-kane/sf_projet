@@ -24,11 +24,7 @@ class Address
      */
     private $LAddress;
    
-    public function __construct()
-    {
-       
-    }
-
+  
     public function getId(): ?int
     {
         return $this->id;

@@ -10,22 +10,23 @@
 
      $("#boursier").hide()
      $("#loger").hide()
-     $("#habite").hide()
+     $("#address").hide()
      $("#etudiant_etre").on('change',function () {
 
        let option = $( "#etudiant_etre option:selected" ).val()
          if(option ==1){
               $("#boursier").show()
-              $("#habite").show()
-              $("#loger").hide()
+              $("#loger").show()
+              $("#address").hide()
          }else if(option ==2){
               $("#boursier").show()
               $("#loger").hide()
-              $("#habite").hide()
+              $("#address").hide()
          }else if(option ==3){
-              $("#loger").show()
+              $("#address").show()
+              $("#loger").hide()
               $("#boursier").hide()
-              $("#habite").hide()
+             
          }
      })
      
@@ -33,5 +34,5 @@
  //etudiant_boursier
  //etudiant_boursier
  //etudiant_loger
- //etudiant_habite
+ //etudiant_address
  //etudiant_etre

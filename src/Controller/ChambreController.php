@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 use App\Entity\Chambre;
+use App\Entity\Etudiant;
 use App\Form\ChambreType;
 use App\Repository\ChambreRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -10,20 +11,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-
-
+use Doctrine\ORM\EntityManagerInterface ;
 class ChambreController extends AbstractController
 {
-    /**
-     * @Route("/chambre", name="chambre_index")
-     */
-    public function index()
+    private $em;
+    public function __construct(EntityManagerInterface $em)
     {
-        return $this->render('chambre/index.html.twig', [
-            'controller_name' => 'ChambreController',
-        ]);
+        $this->em = $em;
     }
-        /**
+   
+     /**
      * @Route("/chambre/create", name="chambre_create")
      */
    public function create( ChambreRepository  $roomRepository,Request $request):Response
@@ -40,9 +37,9 @@ class ChambreController extends AbstractController
                 $nch= sprintf("%03d", $nbat).sprintf("%04d", $chbre);
                 $chambre->setNchambre($nch);
             }
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($chambre);
-            $em->flush();
+       
+            $this->em->persist($chambre);
+            $this->em->flush();
             $this->addFlash('success', 'Le chambre a ete bien  enregistree!');
             return $this->redirectToRoute("chambre_create");
         
@@ -73,14 +70,14 @@ class ChambreController extends AbstractController
     */
     public function update(Request $request,int $id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $chambre = $em->getRepository(Chambre::class)->find($id);
+ 
+        $chambre =  $this->em->getRepository(Chambre::class)->find($id);
         $form = $this->createForm(ChambreType::class, $chambre);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $em->flush();
+            $this->em->flush();
         }
         return $this->render('chambre/createchambre.html.twig', [
             "form_title" => "Modifier un chambre",
@@ -94,11 +91,12 @@ class ChambreController extends AbstractController
     */
     public function delete(int $id)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $chambre = $entityManager->getRepository(Chambre::class)->find($id);
-        $entityManager->remove($chambre);
-        $entityManager->flush();
-    
+     
+        $chambre =  $this->em->getRepository(Chambre::class)->find($id);
+        $this->em->remove($chambre);
+        $this->em->flush();
+        
+        
         return $this->redirectToRoute("chambre_afficher");
     }
       

@@ -54,7 +54,7 @@
                     {{form_label(form.etre,null, {
                         'label': 'Type Etudiant:',
                         'label_attr': {'class': 'foo'}})}}
-                    {{form_widget(form.etre,{'attr': {'class': 'form-control '}})}}
+                    {{form_widget(form.etre,{'attr': {'class': 'form-control ','placeholder':'address'}})}}
                 </div>
                 <div class="form-group col-md-6 " id="boursier">
                        {{form_label(form.boursier,null, {
@@ -62,19 +62,18 @@
                         'label_attr': {'class': 'foo'}})}}
                     {{form_widget(form.boursier,{'attr': {'class': 'form-control '}})}}
                 </div>
-                 <div class="form-group col-md-6  " id="loger">
+                 <div class="form-group col-md-6 " id="loger">
                        {{form_label(form.loger,null, {
-                        'label': 'Addresse:',
-                        'label_attr': {'class': 'foo'}})}}
-                    {{form_widget(form.loger,{'attr': {'class': 'form-control', 'placeholder':'address'}})}}
-                </div>
-                <div class="form-group col-md-6 " id="habite">
-                       {{form_label(form.habite,null, {
                         'label': 'Choix du chambre:',
                         'label_attr': {'class': 'foo'}})}}
-                    {{form_widget(form.habite,{'attr': {'class': 'form-control '}})}}
+                    {{form_widget(form.loger,{'attr': {'class': 'form-control '}})}}
+                </div> 
+                 <div class="form-group col-md-6  " id="address">
+                       {{form_label(form.Address,null, {
+                        'label': 'Addresse:',
+                        'label_attr': {'class': 'foo'}})}}
+                    {{form_widget(form.Address,{'attr': {'class': 'form-control', 'placeholder':'address'}})}}
                 </div>
-               
                 </div>
 
                 <input type="submit" value="Enregistrer" class="btn btn-primary col-6  ">

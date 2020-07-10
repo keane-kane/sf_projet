@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EtudiantRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EtudiantRepository::class)
@@ -17,24 +18,47 @@ class Etudiant
      */
     private $id;
 
-  
     /**
-     * @ORM\Column(type="string", length=50)
+     *  @var string $prenom
+     * @ORM\Column(name="prenom", type="string", length=50)
+     * @Assert\NotBlank(message="Please provide a name")
+     * @Assert\Length(
+     *     min=3,
+     *     max=50,
+     *     minMessage="The name must be at least 3 characters long",
+     *     maxMessage="The name cannot be longer than 50 characters"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[A-Za-z]+$/",
+     *     message="Only letters allowed"
+     * )
      */
+   
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
     private $nom;
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $matricule ;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Email(
+     *      message="Email non valide"
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Regex(
+     *     pattern="/^[7][0|6|7|8]([0-9]{7})$/",
+     *     message="Numero uniquement"
+     * )
      */
     private $tel;
 
@@ -49,22 +73,22 @@ class Etudiant
      */
     private $etre;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist", "remove"})
+   /**
+     * @ORM\ManyToOne(targetEntity=Chambre::class, inversedBy="etudiants")
      */
     private $loger;
 
+   
     /**
-     * @ORM\ManyToOne(targetEntity=Chambre::class, inversedBy="etudiants")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $habite;
+    private $Address;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Bourse::class, inversedBy="etudiants")
+     * @ORM\ManyToOne(targetEntity=TypeBourse::class, inversedBy="etudiants")
      */
     private $boursier;
 
-   
 
     public function getId(): ?int
     {
@@ -155,36 +179,38 @@ class Etudiant
         return $this;
     }
 
-    public function getLoger(): ?Address
+    public function getLoger(): ?Chambre
     {
         return $this->loger;
     }
 
-    public function setLoger(?Address $loger): self
+    public function setLoger(?Chambre $loger): self
     {
         $this->loger = $loger;
 
         return $this;
     }
 
-    public function getHabite(): ?Chambre
+  
+
+    public function getAddress(): ?string
     {
-        return $this->habite;
+        return $this->Address;
     }
 
-    public function setHabite(?Chambre $habite): self
+    public function setAddress(?string $Address): self
     {
-        $this->habite = $habite;
+        $this->Address = $Address;
 
         return $this;
     }
 
-    public function getBoursier(): ?Bourse
+    public function getBoursier(): ?TypeBourse
     {
         return $this->boursier;
     }
 
-    public function setBoursier(?Bourse $boursier): self
+    public function setBoursier(?TypeBourse $boursier): self
     {
         $this->boursier = $boursier;
 

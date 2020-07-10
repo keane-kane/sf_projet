@@ -25,14 +25,16 @@ class TypeBourse
     private $montant;
 
     /**
-     * @ORM\OneToMany(targetEntity=Bourse::class, mappedBy="typeBourse")
+     * @ORM\OneToMany(targetEntity=Etudiant::class, mappedBy="boursier")
      */
-    private $etre;
+    private $etudiants;
 
     public function __construct()
     {
-        $this->etre = new ArrayCollection();
+        $this->etudiants = new ArrayCollection();
     }
+
+  
 
     public function getId(): ?int
     {
@@ -52,33 +54,34 @@ class TypeBourse
     }
 
     /**
-     * @return Collection|Bourse[]
+     * @return Collection|Etudiant[]
      */
-    public function getEtre(): Collection
+    public function getEtudiants(): Collection
     {
-        return $this->etre;
+        return $this->etudiants;
     }
 
-    public function addEtre(Bourse $etre): self
+    public function addEtudiant(Etudiant $etudiant): self
     {
-        if (!$this->etre->contains($etre)) {
-            $this->etre[] = $etre;
-            $etre->setTypeBourse($this);
+        if (!$this->etudiants->contains($etudiant)) {
+            $this->etudiants[] = $etudiant;
+            $etudiant->setBoursier($this);
         }
 
         return $this;
     }
 
-    public function removeEtre(Bourse $etre): self
+    public function removeEtudiant(Etudiant $etudiant): self
     {
-        if ($this->etre->contains($etre)) {
-            $this->etre->removeElement($etre);
+        if ($this->etudiants->contains($etudiant)) {
+            $this->etudiants->removeElement($etudiant);
             // set the owning side to null (unless already changed)
-            if ($etre->getTypeBourse() === $this) {
-                $etre->setTypeBourse(null);
+            if ($etudiant->getBoursier() === $this) {
+                $etudiant->setBoursier(null);
             }
         }
 
         return $this;
     }
-}
+
+  }

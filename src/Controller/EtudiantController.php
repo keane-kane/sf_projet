@@ -5,19 +5,26 @@ use App\Entity\Etudiant;
 use App\Form\EtudiantType;
 use App\Repository\EtudiantRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface ;
 class EtudiantController extends AbstractController
 {
+
+    private $em;
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
     public function Matricule($n,$p,$id)
     {
         $n= strtoupper($n[0].$n[1]);
         $p=strtoupper($p[strlen($p)-2].$p[strlen($p)-1]);
         return date('Y', time()).$n.$p.sprintf("%04d", $id);
     }
+
     /**
      * @Route("/", name="etudiant")
      */
@@ -28,20 +35,17 @@ class EtudiantController extends AbstractController
         $etudiant = new Etudiant();
        
         $form = $this->createForm(EtudiantType::class,$etudiant);
-        // dd($etudiant);
-        $em = $this->getDoctrine()->getManager();
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-
             $p= $form["prenom"]->getData();
             $n= $form['nom']->getData();
             $id =  $lastMat+1;
             $matricule = $this->Matricule($n,$p,$id);
             $etudiant->setMatricule($matricule);
 
-            $em->persist($etudiant);
-            $em->flush();
+            $this->em->persist($etudiant);
+            $this->em->flush();
             
             $this->addFlash('success', 'L\'etudiant a ete bien  enregistre!');
             return $this->redirectToRoute("etudiant");
@@ -51,7 +55,7 @@ class EtudiantController extends AbstractController
              'form'=> $form->createView()
         ]);
     }
-      /**
+    /**
      * @Route("/etudiant", name="etudiant_afficher")
      */
     public function afficher(EtudiantRepository $etudiantRepository,  PaginatorInterface $paginator, Request $request)
@@ -69,14 +73,13 @@ class EtudiantController extends AbstractController
     */
     public function update(Request $request,int $id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $etudiants = $em->getRepository(Etudiant::class)->find($id);
+        $etudiants = $this->em->getRepository(Etudiant::class)->find($id);
         $form = $this->createForm(EtudiantType::class, $etudiants);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $em->flush();
+            $this->em->flush();
         }
         return $this->render('etudiant/createetudiant.html.twig', [
             "form_title" => "Modifier un etudiant",
@@ -89,24 +92,22 @@ class EtudiantController extends AbstractController
     */
     public function delete(int $id)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $etudiant = $entityManager->getRepository(Etudiant::class)->find($id);
-        $entityManager->remove($etudiant);
-        $entityManager->flush();
-    
+        $etudiant = $this->em->getRepository(Etudiant::class)->find($id);
+        $this->em->remove($etudiant);
+        $this->em->flush();
         return $this->redirectToRoute("etudiant_afficher");
     }
       
     /**
      * @Route("/etudiant/detail/{id}", name="etudiant_detail")
     */
-    public function detail(int $id)
+    public function detail(EtudiantRepository $etudiantRepository,Request $request, int $id)
     {
-        $entityManager = $this->getDoctrine()->getManager();
+        $etudiant =$etudiantRepository->find($id);
+       //dd(compact('etudiant'));
       
-    
-    
-        return $this->redirectToRoute("etudiant_afficher");
+        return $this->render('etudiant/detail.html.twig',compact('etudiant'));
+       
     }
       
 }

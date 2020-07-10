@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello !{% endblock %}
+
+{% block body %}
+
+<div class="d-flex align-items-center justify-content-center ">
+
+<table class=" table table-striped table-dark mt-5 col-sm-12 col-md-5 col-lg-4">
+ 
+  <tbody>
+    <tr>
+        <th>Matricule</th>
+        <td>{{etudiant.matricule}}</td>
+    </tr>
+    <tr>
+        <th>Prenom</th>
+        <td>{{etudiant.prenom}}</td>
+    </tr>
+    <tr>
+        <th>Nom</th>   
+        <td>{{etudiant.nom}}</td>
+    </tr>
+    <tr>
+        <th>Email</th>   
+        <td>{{etudiant.email}}</td>
+    </tr>
+    <tr>
+        <th>Telephone</th>   
+        <td>{{etudiant.tel}}</td>
+    </tr>
+    <tr>
+        <th>Date Naiss</th>   
+        <td>{{etudiant.dateNaiss|date('y/m/d')}}</td>
+    </tr>
+    
+       {% if etudiant.etre.id ==1 %}
+        <tr>
+            <th>Status</th>
+            <td>Bousier et Logé</td>
+        </tr>
+        <tr>
+            <th>Bourse</th>
+            <td>{{etudiant.boursier.getMontant()}}</td>
+        </tr>
+        <tr>
+            <th>Chambre logé</th>
+            <td>{{etudiant.loger.getNchambre()}}</td>
+        </tr>
+       {% elseif etudiant.etre.id ==2 %}
+       <tr>
+            <th>Status</th>
+            <td>Bousier et non Logé</td>
+        </tr>
+        <tr>
+            <th>Bourse</th>
+            <td>{{etudiant.boursier.getMontant()}}</td>
+        </tr>
+        
+       {% elseif etudiant.etre.id ==3 %}
+        <tr>
+            <th>Status</th>
+            <td>Non Bousier</td>
+        </tr>
+         <tr>
+            <th>Adresse</th>
+            <td>{{etudiant.Address}}</td>
+        </tr>
+       {% endif %}
+
+    
+
+  </tbody>
+</table>
+
+</div>
+
+{% endblock %}

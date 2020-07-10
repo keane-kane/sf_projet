@@ -2,12 +2,14 @@
 
 namespace App\Form;
 
+
+
 use App\Entity\Etudiant;
 use App\Entity\TypeBourse;
 use App\Entity\Chambre;
-use App\Entity\AddressType;
 use App\Entity\TypeEtudiant;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
@@ -23,7 +25,7 @@ class EtudiantType extends AbstractType
             ->add('prenom',TextType::class)
             ->add('nom',TextType::class)
             ->add('email',EmailType::class)
-            ->add('tel')
+            ->add('tel',NumberType::class)
             ->add('dateNaiss', DateType::class,[
                 // renders it as a single text box
                 'widget' => 'single_text',
@@ -35,8 +37,7 @@ class EtudiantType extends AbstractType
                     return $etre->getOptions();
                 },
             ])
-            ->add('loger',TextType::class)
-            ->add('habite',null,[
+            ->add('loger',null,[
                 'class' =>Chambre::class,
                 'choice_label' => function($loger){
                     return $loger->getNchambre();
@@ -48,6 +49,7 @@ class EtudiantType extends AbstractType
                     return $boursier->getMontant();
                 },
             ])
+            ->add('Address')
         ;
     }
 
